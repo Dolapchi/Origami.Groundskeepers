@@ -15,7 +15,6 @@
             --text-main: #e0ffeb;
             --text-muted: rgba(0, 255, 102, 0.5);
         }
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -23,7 +22,6 @@
             font-family: 'Courier New', Courier, monospace, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
-
         body {
             background: var(--bg-main);
             background-image: 
@@ -39,7 +37,6 @@
             align-items: center;
             padding: 16px;
         }
-
         .calculator-card {
             background: var(--panel-bg);
             backdrop-filter: blur(15px);
@@ -52,21 +49,17 @@
             box-shadow: 0 0 40px rgba(0,0,0,0.9), inset 0 0 20px rgba(0, 255, 102, 0.05);
             position: relative;
         }
-
-        /* Декоративные углы как на картинке */
         .calculator-card::before, .calculator-card::after {
-            content: ''; position: absolute; width: 10px; height: 10px; border-color: var(--neon-green); border-style: solid; width: 12px; height: 12px;
+            content: ''; position: absolute; width: 12px; height: 12px; border-color: var(--neon-green); border-style: solid;
         }
         .calculator-card::before { top: -2px; left: -2px; border-width: 2px 0 0 2px; }
         .calculator-card::after { bottom: -2px; right: -2px; border-width: 0 2px 2px 0; }
-
         .header {
             text-align: left;
             margin-bottom: 24px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 12px;
         }
-
         .header h1 {
             font-size: 18px;
             font-weight: 300;
@@ -74,28 +67,23 @@
             color: var(--neon-green);
             text-shadow: 0 0 8px var(--neon-glow);
         }
-
         .header h1 span {
             font-size: 10px;
             vertical-align: super;
             margin-left: 2px;
         }
-
         .form-group {
             margin-bottom: 16px;
         }
-
         .form-row {
             display: flex;
             gap: 12px;
             margin-bottom: 16px;
         }
-
         .form-row .form-group {
             flex: 1;
             margin-bottom: 0;
         }
-
         label {
             display: block;
             font-size: 11px;
@@ -104,7 +92,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
         input[type="number"] {
             width: 100%;
             background: rgba(0, 10, 4, 0.8);
@@ -117,24 +104,20 @@
             transition: all 0.2s ease;
             box-shadow: inset 0 0 8px rgba(0,0,0,0.8);
         }
-
         input[type="number"]:focus:not(:disabled) {
             border-color: var(--neon-green);
             box-shadow: 0 0 10px var(--neon-glow), inset 0 0 5px rgba(0, 255, 102, 0.2);
         }
-
         input:disabled {
             opacity: 0.1;
             cursor: not-allowed;
             border-color: rgba(0, 255, 102, 0.05);
         }
-
         .helper-text {
             font-size: 10px;
             color: rgba(0, 255, 102, 0.3);
             margin-top: 5px;
         }
-
         .checkbox-container {
             display: flex;
             align-items: center;
@@ -143,13 +126,11 @@
             cursor: pointer;
             user-select: none;
         }
-
         .checkbox-container input {
             position: absolute;
             opacity: 0;
             cursor: pointer;
         }
-
         .checkmark {
             height: 18px;
             width: 18px;
@@ -161,13 +142,11 @@
             align-items: center;
             justify-content: center;
         }
-
         .checkbox-container input:checked ~ .checkmark {
             background: rgba(0, 255, 102, 0.2);
             border-color: var(--neon-green);
             box-shadow: 0 0 8px var(--neon-glow);
         }
-
         .checkmark:after {
             content: "";
             display: none;
@@ -178,23 +157,19 @@
             transform: rotate(45deg);
             margin-bottom: 2px;
         }
-
         .checkbox-container input:checked ~ .checkmark:after {
             display: block;
         }
-
         .checkbox-label {
             font-size: 12px;
             color: var(--text-main);
             letter-spacing: 0.5px;
         }
-
         .btn-row {
             display: flex;
             gap: 12px;
             margin-top: 20px;
         }
-
         .btn {
             flex: 1;
             padding: 12px;
@@ -207,31 +182,26 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
-
         .btn-calc {
             background: transparent;
             color: var(--neon-green);
             border: 1px solid var(--neon-green);
             box-shadow: 0 0 10px rgba(0, 255, 102, 0.1);
         }
-
         .btn-calc:hover {
             background: var(--neon-green);
             color: #000000;
             box-shadow: 0 0 15px var(--neon-glow);
         }
-
         .btn-clear {
             background: transparent;
             color: #ff3b3b;
             border: 1px solid rgba(255, 59, 59, 0.4);
         }
-
         .btn-clear:hover {
             background: rgba(255, 59, 59, 0.1);
             border-color: #ff3b3b;
         }
-
         .result-box {
             background: rgba(0, 30, 12, 0.8);
             border: 1px solid var(--neon-green);
@@ -241,7 +211,6 @@
             margin-top: 20px;
             box-shadow: 0 0 15px rgba(0, 255, 102, 0.1);
         }
-
         .result-title {
             font-size: 10px;
             text-transform: uppercase;
@@ -249,14 +218,12 @@
             color: var(--text-muted);
             margin-bottom: 4px;
         }
-
         .result-value {
             font-size: 28px;
             font-weight: 700;
             color: var(--neon-green);
             text-shadow: 0 0 10px var(--neon-glow);
         }
-
         .result-stats {
             font-size: 11px;
             color: rgba(0, 255, 102, 0.4);
@@ -265,17 +232,14 @@
     </style>
 </head>
 <body class="notranslate" translate="no">
-
 <div class="calculator-card">
     <div class="header">
         <h1>Origami | Groundskeepers<span>™</span></h1>
     </div>
-
     <div class="form-group">
         <label>Стоимость, м²/руб.</label>
         <input type="number" id="price" placeholder="0.00" min="0" step="0.01">
     </div>
-
     <div class="form-row">
         <div class="form-group">
             <label>Длина поля, м</label>
@@ -286,42 +250,35 @@
             <input type="number" id="width" placeholder="0" min="0">
         </div>
     </div>
-
     <div class="form-group">
         <label>Количество соток</label>
         <input type="number" id="sotki" placeholder="0" min="0" step="0.1">
         <div class="helper-text" id="sotki-helper">> Заполняется, если известно количество соток</div>
     </div>
-
     <label class="checkbox-container">
         <input type="checkbox" id="complex">
         <span class="checkmark"></span>
         <span class="checkbox-label">> Сложный ландшафт (+25%)</span>
     </label>
-
     <label class="checkbox-container">
         <input type="checkbox" id="highGrass">
         <span class="checkmark"></span>
         <span class="checkbox-label">> Высота травы более 100 см (+75%)</span>
     </label>
-
     <div class="form-group" style="margin-top: 10px;">
         <label>Скидка, %</label>
         <input type="number" id="discount" placeholder="0" min="0" max="100">
     </div>
-
     <div class="btn-row">
         <button class="btn btn-clear" onclick="clearAll()">Очистить</button>
         <button class="btn btn-calc" onclick="calculate()">Расчет</button>
     </div>
-
     <div class="result-box">
         <div class="result-title">// Итоговая сумма //</div>
         <div class="result-value" id="total-sum">0.00 ₽</div>
         <div class="result-stats" id="area-stats">Общая площадь: 0 кв.м.</div>
     </div>
 </div>
-
 <script>
     const priceInput = document.getElementById('price');
     const lengthInput = document.getElementById('length');
@@ -330,70 +287,53 @@
     const complexCheck = document.getElementById('complex');
     const highGrassCheck = document.getElementById('highGrass');
     const discountInput = document.getElementById('discount');
-    
     const totalSumEl = document.getElementById('total-sum');
     const areaStatsEl = document.getElementById('area-stats');
 
     function handleLocking() {
         const hasLengthOrWidth = lengthInput.value.trim() !== '' || widthInput.value.trim() !== '';
         const hasSotki = sotkiInput.value.trim() !== '';
-
         if (hasLengthOrWidth) {
             sotkiInput.disabled = true;
-            sotkiInput.value = '';
         } else if (hasSotki) {
             lengthInput.disabled = true;
             widthInput.disabled = true;
-            lengthInput.value = '';
-            widthInput.value = '';
         } else {
             sotkiInput.disabled = false;
             lengthInput.disabled = false;
             widthInput.disabled = false;
         }
     }
-
     [lengthInput, widthInput, sotkiInput].forEach(input => {
         input.addEventListener('input', handleLocking);
     });
-
     function calculate() {
         const price = parseFloat(priceInput.value) || 0;
         const length = parseFloat(lengthInput.value) || 0;
         const width = parseFloat(widthInput.value) || 0;
         const sotki = parseFloat(sotkiInput.value) || 0;
         const discount = parseFloat(discountInput.value) || 0;
-
         let calculatedSqM = 0;
-
         if (length > 0 && width > 0) {
             calculatedSqM = length * width;
         } else if (sotki > 0) {
             calculatedSqM = sotki * 100;
         }
-
         if (price <= 0 || calculatedSqM <= 0) {
             totalSumEl.innerText = "0.00 ₽";
             areaStatsEl.innerText = `Общая площадь: ${calculatedSqM.toFixed(1)} кв.м.`;
             return;
         }
-
-        // Новая математика: коэффициенты считаются отдельно от базы и суммируются
         const baseSum = calculatedSqM * price;
         let complexBonus = complexCheck.checked ? (baseSum * 0.25) : 0;
         let highGrassBonus = highGrassCheck.checked ? (baseSum * 0.75) : 0;
-
         let total = baseSum + complexBonus + highGrassBonus;
-
-        // Вычитание процента скидки из получившейся суммы
         if (discount > 0 && discount <= 100) {
             total *= (1 - discount / 100);
         }
-
         totalSumEl.innerText = `${total.toLocaleString('ru-RU', {minimumFractionDigits: 2, maximumFractionDigits: 2})} ₽`;
         areaStatsEl.innerText = `Общая площадь: ${calculatedSqM.toFixed(1)} кв.м. (${(calculatedSqM / 100).toFixed(2)} сот.)`;
     }
-
     function clearAll() {
         priceInput.value = '';
         lengthInput.value = '';
@@ -402,11 +342,9 @@
         discountInput.value = '';
         complexCheck.checked = false;
         highGrassCheck.checked = false;
-        
         sotkiInput.disabled = false;
         lengthInput.disabled = false;
         widthInput.disabled = false;
-        
         totalSumEl.innerText = "0.00 ₽";
         areaStatsEl.innerText = "Общая площадь: 0 кв.м.";
     }
