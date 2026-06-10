@@ -104,14 +104,9 @@
             transition: all 0.2s ease;
             box-shadow: inset 0 0 8px rgba(0,0,0,0.8);
         }
-        input[type="number"]:focus:not(:disabled) {
+        input[type="number"]:focus {
             border-color: var(--neon-green);
             box-shadow: 0 0 10px var(--neon-glow), inset 0 0 5px rgba(0, 255, 102, 0.2);
-        }
-        input:disabled {
-            opacity: 0.1;
-            cursor: not-allowed;
-            border-color: rgba(0, 255, 102, 0.05);
         }
         .helper-text {
             font-size: 10px;
@@ -290,50 +285,41 @@
     const totalSumEl = document.getElementById('total-sum');
     const areaStatsEl = document.getElementById('area-stats');
 
-    function handleLocking() {
-        const hasLengthOrWidth = lengthInput.value.trim() !== '' || widthInput.value.trim() !== '';
-        const hasSotki = sotkiInput.value.trim() !== '';
-        if (hasLengthOrWidth) {
-            sotkiInput.disabled = true;
-        } else if (hasSotki) {
-            lengthInput.disabled = true;
-            widthInput.disabled = true;
-        } else {
-            sotkiInput.disabled = false;
-            lengthInput.disabled = false;
-            widthInput.disabled = false;
-        }
-    }
-    [lengthInput, widthInput, sotkiInput].forEach(input => {
-        input.addEventListener('input', handleLocking);
-    });
     function calculate() {
         const price = parseFloat(priceInput.value) || 0;
         const length = parseFloat(lengthInput.value) || 0;
         const width = parseFloat(widthInput.value) || 0;
         const sotki = parseFloat(sotkiInput.value) || 0;
         const discount = parseFloat(discountInput.value) || 0;
+        
         let calculatedSqM = 0;
+
+        // Полностью независимый выбор: если есть длина и ширина — считаем по ним, если нет — по соткам
         if (length > 0 && width > 0) {
             calculatedSqM = length * width;
         } else if (sotki > 0) {
             calculatedSqM = sotki * 100;
         }
+
         if (price <= 0 || calculatedSqM <= 0) {
             totalSumEl.innerText = "0.00 ₽";
             areaStatsEl.innerText = `Общая площадь: ${calculatedSqM.toFixed(1)} кв.м.`;
             return;
         }
+
         const baseSum = calculatedSqM * price;
         let complexBonus = complexCheck.checked ? (baseSum * 0.25) : 0;
         let highGrassBonus = highGrassCheck.checked ? (baseSum * 0.75) : 0;
         let total = baseSum + complexBonus + highGrassBonus;
+
         if (discount > 0 && discount <= 100) {
             total *= (1 - discount / 100);
         }
+
         totalSumEl.innerText = `${total.toLocaleString('ru-RU', {minimumFractionDigits: 2, maximumFractionDigits: 2})} ₽`;
         areaStatsEl.innerText = `Общая площадь: ${calculatedSqM.toFixed(1)} кв.м. (${(calculatedSqM / 100).toFixed(2)} сот.)`;
     }
+
     function clearAll() {
         priceInput.value = '';
         lengthInput.value = '';
@@ -342,9 +328,6 @@
         discountInput.value = '';
         complexCheck.checked = false;
         highGrassCheck.checked = false;
-        sotkiInput.disabled = false;
-        lengthInput.disabled = false;
-        widthInput.disabled = false;
         totalSumEl.innerText = "0.00 ₽";
         areaStatsEl.innerText = "Общая площадь: 0 кв.м.";
     }
