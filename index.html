@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="notranslate">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Origami | Groundskeeper v.1.0</title>
+    <meta name="google" content="notranslate">
+    <title>Origami | Groundskeepers™</title>
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #112214 0%, #070d08 100%);
-            --glass-bg: rgba(255, 255, 255, 0.06);
-            --glass-border: rgba(255, 255, 255, 0.12);
-            --accent-green: #4caf50;
-            --accent-glow: rgba(76, 175, 80, 0.3);
+            --bg-gradient: linear-gradient(135deg, #050f07 0%, #020503 100%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --neon-green: #39ff14;
+            --neon-glow: rgba(57, 255, 20, 0.4);
             --text-main: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.6);
+            --text-muted: rgba(255, 255, 255, 0.5);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -35,26 +36,33 @@
 
         .calculator-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
+            border-radius: 20px;
             width: 100%;
             max-width: 440px;
-            padding: 28px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(57, 255, 20, 0.05);
         }
 
         .header {
-            text-align: center;
-            margin-bottom: 24px;
+            text-align: left;
+            margin-bottom: 26px;
         }
 
         .header h1 {
             font-size: 20px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            font-weight: 300;
+            letter-spacing: 0.8px;
+            color: var(--text-main);
+        }
+
+        .header h1 span {
+            font-size: 11px;
+            vertical-align: super;
+            font-weight: 400;
+            margin-left: 2px;
         }
 
         .form-group {
@@ -63,7 +71,7 @@
 
         .form-row {
             display: flex;
-            gap: 12px;
+            gap: 14px;
             margin-bottom: 18px;
         }
 
@@ -74,48 +82,49 @@
 
         label {
             display: block;
-            font-size: 13px;
+            font-size: 12.5px;
             color: var(--text-muted);
             margin-bottom: 8px;
-            padding-left: 4px;
+            padding-left: 2px;
+            letter-spacing: 0.3px;
         }
 
         input[type="number"] {
             width: 100%;
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 14px 16px;
+            border-radius: 10px;
+            padding: 13px 15px;
             color: var(--text-main);
             font-size: 16px;
             outline: none;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
-        input[type="number"]:focus {
-            border-color: var(--accent-green);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 10px var(--accent-glow);
+        input[type="number"]:focus:not(:disabled) {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 12px var(--neon-glow);
+            background: rgba(0, 0, 0, 0.6);
         }
 
         input:disabled {
-            opacity: 0.3;
+            opacity: 0.15;
             cursor: not-allowed;
-            background: rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.05);
         }
 
         .helper-text {
             font-size: 11px;
-            color: rgba(255, 255, 255, 0.35);
-            margin-top: 4px;
-            padding-left: 4px;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 5px;
+            padding-left: 2px;
         }
 
         .checkbox-container {
             display: flex;
             align-items: center;
             position: relative;
-            padding: 12px 4px;
+            padding: 10px 2px;
             cursor: pointer;
             user-select: none;
         }
@@ -129,11 +138,11 @@
         }
 
         .checkmark {
-            height: 22px;
-            width: 22px;
-            background: rgba(255, 255, 255, 0.1);
+            height: 20px;
+            width: 20px;
+            background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--glass-border);
-            border-radius: 6px;
+            border-radius: 5px;
             margin-right: 12px;
             display: flex;
             align-items: center;
@@ -141,22 +150,18 @@
             transition: all 0.2s ease;
         }
 
-        .checkbox-container:hover input ~ .checkmark {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
         .checkbox-container input:checked ~ .checkmark {
-            background: var(--accent-green);
-            border-color: var(--accent-green);
-            box-shadow: 0 0 8px var(--accent-glow);
+            background: var(--neon-green);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 8px var(--neon-glow);
         }
 
         .checkmark:after {
             content: "";
             display: none;
-            width: 5px;
-            height: 10px;
-            border: solid #000;
+            width: 4px;
+            height: 9px;
+            border: solid #000000;
             border-width: 0 2.5px 2.5px 0;
             transform: rotate(45deg);
             margin-bottom: 2px;
@@ -167,22 +172,68 @@
         }
 
         .checkbox-label {
-            font-size: 14px;
+            font-size: 13.5px;
             color: var(--text-main);
+            letter-spacing: 0.2px;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-calc {
+            background: var(--neon-green);
+            color: #000000;
+            border: none;
+            box-shadow: 0 4px 15px rgba(57, 255, 20, 0.2);
+        }
+
+        .btn-calc:hover {
+            box-shadow: 0 0 18px var(--neon-glow);
+            transform: translateY(-1px);
+        }
+
+        .btn-clear {
+            background: transparent;
+            color: #ff4a4a;
+            border: 1px solid rgba(255, 74, 74, 0.3);
+        }
+
+        .btn-clear:hover {
+            background: rgba(255, 74, 74, 0.08);
+            border-color: #ff4a4a;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
         }
 
         .result-box {
-            background: rgba(76, 175, 80, 0.12);
-            border: 1px solid rgba(76, 175, 80, 0.3);
-            border-radius: 16px;
+            background: rgba(57, 255, 20, 0.03);
+            border: 1px solid rgba(57, 255, 20, 0.15);
+            border-radius: 14px;
             padding: 20px;
             text-align: center;
             margin-top: 24px;
-            box-shadow: inset 0 0 15px rgba(76, 175, 80, 0.05);
         }
 
         .result-title {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--text-muted);
@@ -190,9 +241,10 @@
         }
 
         .result-value {
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 700;
-            color: #ffffff;
+            color: var(--neon-green);
+            text-shadow: 0 0 12px var(--neon-glow);
         }
 
         .result-stats {
@@ -202,62 +254,60 @@
         }
     </style>
 </head>
-<body>
+<body class="notranslate" translate="no">
 
 <div class="calculator-card">
     <div class="header">
-        <h1>Origami | Groundskeeper(r) v.1.0</h1>
+        <h1>Origami | Groundskeepers<span>™</span></h1>
     </div>
 
-    <!-- Поле 0 -->
     <div class="form-group">
-        <label for="price">Поле 0: Стоимость кв. метра (руб)</label>
+        <label>Стоимость, м²/руб.</label>
         <input type="number" id="price" placeholder="0.00" min="0" step="0.01">
     </div>
 
-    <!-- Поле 1 -->
     <div class="form-row">
         <div class="form-group">
-            <label for="length">Длина поля (м)</label>
+            <label>Длина поля, м</label>
             <input type="number" id="length" placeholder="0" min="0">
         </div>
         <div class="form-group">
-            <label for="width">Ширина поля (м)</label>
+            <label>Ширина поля, м</label>
             <input type="number" id="width" placeholder="0" min="0">
         </div>
     </div>
 
-    <!-- Поле 2 -->
     <div class="form-group">
-        <label for="sotki">Поле 2: Количество соток</label>
+        <label>Количество соток</label>
         <input type="number" id="sotki" placeholder="0" min="0" step="0.1">
-        <div class="helper-text" id="sotki-helper">Заполните, если Длина и Ширина пусты</div>
+        <div class="helper-text" id="sotki-helper">Заполняется, если известно количество соток</div>
     </div>
 
-    <!-- Поле 3 -->
     <label class="checkbox-container">
         <input type="checkbox" id="complex">
         <span class="checkmark"></span>
-        <span class="checkbox-label">Поле 3: Сложный ландшафт (коэф. 1.25)</span>
+        <span class="checkbox-label">Сложный ландшафт (+25%)</span>
     </label>
 
-    <!-- Поле 4 -->
     <label class="checkbox-container">
         <input type="checkbox" id="highGrass">
         <span class="checkmark"></span>
-        <span class="checkbox-label">Поле 4: Высота травы > 100 см (коэф. 1.75)</span>
+        <span class="checkbox-label">Высота травы более 100 см (+75%)</span>
     </label>
 
-    <!-- Поле 5 -->
-    <div class="form-group" style="margin-top: 8px;">
-        <label for="discount">Поле 5: Скидка (%)</label>
+    <div class="form-group" style="margin-top: 10px;">
+        <label>Скидка, %</label>
         <input type="number" id="discount" placeholder="0" min="0" max="100">
     </div>
 
-    <!-- Результат -->
+    <div class="btn-row">
+        <button class="btn btn-clear" onclick="clearAll()">Очистить</button>
+        <button class="btn btn-calc" onclick="calculate()">Расчет</button>
+    </div>
+
     <div class="result-box">
         <div class="result-title">Итоговая сумма</div>
-        <div class="result-value" id="total-sum">0.00 руб.</div>
+        <div class="result-value" id="total-sum">0.00 ₽</div>
         <div class="result-stats" id="area-stats">Общая площадь: 0 кв.м.</div>
     </div>
 </div>
@@ -273,31 +323,47 @@
     
     const totalSumEl = document.getElementById('total-sum');
     const areaStatsEl = document.getElementById('area-stats');
-    const sotkiHelper = document.getElementById('sotki-helper');
+
+    function handleLocking() {
+        const hasLengthOrWidth = lengthInput.value.trim() !== '' || widthInput.value.trim() !== '';
+        const hasSotki = sotkiInput.value.trim() !== '';
+
+        if (hasLengthOrWidth) {
+            sotkiInput.disabled = true;
+            sotkiInput.value = '';
+        } else if (hasSotki) {
+            lengthInput.disabled = true;
+            widthInput.disabled = true;
+            lengthInput.value = '';
+            widthInput.value = '';
+        } else {
+            sotkiInput.disabled = false;
+            lengthInput.disabled = false;
+            widthInput.disabled = false;
+        }
+    }
+
+    [lengthInput, widthInput, sotkiInput].forEach(input => {
+        input.addEventListener('input', handleLocking);
+    });
 
     function calculate() {
         const price = parseFloat(priceInput.value) || 0;
         const length = parseFloat(lengthInput.value) || 0;
         const width = parseFloat(widthInput.value) || 0;
-        let sotki = parseFloat(sotkiInput.value) || 0;
+        const sotki = parseFloat(sotkiInput.value) || 0;
         const discount = parseFloat(discountInput.value) || 0;
 
-        const isField1Active = length > 0 || width > 0;
         let calculatedSqM = 0;
 
-        if (isField1Active) {
-            sotkiInput.disabled = true;
+        if (length > 0 && width > 0) {
             calculatedSqM = length * width;
-            sotkiInput.value = (calculatedSqM / 100).toFixed(2);
-            sotkiHelper.innerText = "Рассчитано автоматически из габаритов поля";
-        } else {
-            sotkiInput.disabled = false;
+        } else if (sotki > 0) {
             calculatedSqM = sotki * 100;
-            sotkiHelper.innerText = "Заполните, если Длина и Ширина пусты";
         }
 
         if (price <= 0 || calculatedSqM <= 0) {
-            totalSumEl.innerText = "0.00 руб.";
+            totalSumEl.innerText = "0.00 ₽";
             areaStatsEl.innerText = `Общая площадь: ${calculatedSqM.toFixed(1)} кв.м.`;
             return;
         }
@@ -312,11 +378,27 @@
             total *= (1 - discount / 100);
         }
 
-        totalSumEl.innerText = `${total.toLocaleString('ru-RU', {minimumFractionDigits: 2, maximumFractionDigits: 2})} руб.`;
-        areaStatsEl.innerText = `Общая площадь: ${calculatedSqM.toFixed(1)} кв.м. (${(calculatedSqM/100).toFixed(2)} сот.)`;
+        totalSumEl.innerText = `${total.toLocaleString('ru-RU', {minimumFractionDigits: 2, maximumFractionDigits: 2})} ₽`;
+        areaStatsEl.innerText = `Общая площадь: ${calculatedSqM.toFixed(1)} кв.м. (${(calculatedSqM / 100).toFixed(2)} сот.)`;
     }
 
-    [priceInput, lengthInput, widthInput, sotkiInput, discountInput].forEach(input => {
-        input.addEventListener('input', calculate);
-    });
-    [complexCheck, highGrassCheck].forEach(check => {check.addEventListener('change', calculate);});
+    function clearAll() {
+        priceInput.value = '';
+        lengthInput.value = '';
+        widthInput.value = '';
+        sotkiInput.value = '';
+        discountInput.value = '';
+        complexCheck.checked = false;
+        highGrassCheck.checked = false;
+        
+        sotkiInput.disabled = false;
+        lengthInput.disabled = false;
+        widthInput.disabled = false;
+        
+        totalSumEl.innerText = "0.00 ₽";
+        areaStatsEl.innerText = "Общая площадь: 0 кв.м.";
+    }
+</script>
+</body>
+</html>
+
