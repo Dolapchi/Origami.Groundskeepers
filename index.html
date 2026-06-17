@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google" content="notranslate">
+    <link rel="manifest" href="./manifest.json">
     <title>Origami | Groundskeepers™</title>
     <style>
         :root {
@@ -291,45 +292,37 @@
         const width = parseFloat(widthInput.value) || 0;
         const sotki = parseFloat(sotkiInput.value) || 0;
         const discount = parseFloat(discountInput.value) || 0;
-        
         let calculatedSqM = 0;
-
-        // Полностью независимый выбор: если есть длина и ширина — считаем по ним, если нет — по соткам
         if (length > 0 && width > 0) {
             calculatedSqM = length * width;
         } else if (sotki > 0) {
             calculatedSqM = sotki * 100;
         }
-
         if (price <= 0 || calculatedSqM <= 0) {
             totalSumEl.innerText = "0.00 ₽";
             areaStatsEl.innerText = `Общая площадь: ${calculatedSqM.toFixed(1)} кв.м.`;
             return;
         }
-
         const baseSum = calculatedSqM * price;
         let complexBonus = complexCheck.checked ? (baseSum * 0.25) : 0;
         let highGrassBonus = highGrassCheck.checked ? (baseSum * 0.75) : 0;
         let total = baseSum + complexBonus + highGrassBonus;
-
         if (discount > 0 && discount <= 100) {
             total *= (1 - discount / 100);
         }
-
         totalSumEl.innerText = `${total.toLocaleString('ru-RU', {minimumFractionDigits: 2, maximumFractionDigits: 2})} ₽`;
         areaStatsEl.innerText = `Общая площадь: ${calculatedSqM.toFixed(1)} кв.м. (${(calculatedSqM / 100).toFixed(2)} сот.)`;
     }
 
     function clearAll() {
-        priceInput.value = '';
-        lengthInput.value = '';
-        widthInput.value = '';
-        sotkiInput.value = '';
-        discountInput.value = '';
-        complexCheck.checked = false;
-        highGrassCheck.checked = false;
-        totalSumEl.innerText = "0.00 ₽";
-        areaStatsEl.innerText = "Общая площадь: 0 кв.м.";
+        priceInput.value = ''; lengthInput.value = ''; widthInput.value = ''; sotkiInput.value = ''; discountInput.value = '';
+        complexCheck.checked = false; highGrassCheck.checked = false;
+        totalSumEl.innerText = "0.00 ₽"; areaStatsEl.innerText = "Общая площадь: 0 кв.м.";
+    }
+
+    // Регистрация PWA робота
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
     }
 </script>
 </body>
